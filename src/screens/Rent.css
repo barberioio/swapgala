@@ -1,0 +1,146 @@
+.contentContainer {
+    display: flex;
+    justify-content: center;
+    height: 80vh;
+}
+
+.content {
+    width: 80%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+}
+
+.small-img {
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+}
+
+.small-img img {
+    height: 20vh;
+    cursor: pointer;
+}
+
+.big-img {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+}
+
+.big-img img {
+    height: 73vh;
+}
+
+img {
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.detail {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 70vh;
+}
+
+.header-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 10%;
+}
+
+.dress-name {
+    font-size: 25px;
+}
+
+.dress-detail {
+    font-size: 16px;
+}
+
+.price {
+    height: 5%;
+    display: flex;
+    margin-bottom: 30px;
+
+}
+
+.border-price {
+    border: 1px solid black;
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+    padding: 10px;
+}
+
+.blank {
+    width: 65%;
+    border-bottom: 1px solid black;
+}
+
+.dropdown {
+    height: 10%;
+}
+
+.delivery-details {
+    height: 22%;
+}
+
+select {
+    outline: none;
+    width: 100%;
+    height: 35px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+input[type=radio] {
+    cursor: pointer;
+}
+
+label {
+    cursor: pointer;
+}
+
+input[type=date] {
+    outline: none;
+    width: 95%;
+    height: 35px;
+    margin-top: 20px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.button-rent {
+    height: 12%;
+}
+
+.button-rent button {
+    outline: none;
+    width: 100%;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+    background-color: #F1B660;
+    color: white;
+    cursor: pointer;
+}
+
+.size {
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+    cursor: pointer;
+}
+
+.product {
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+    margin-top: 5px;
+    cursor: pointer;
+}

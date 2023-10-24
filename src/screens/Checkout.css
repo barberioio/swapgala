@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+.rent {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.rent-container {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 5%;
+}
+
+.delivery {
+    width: 40%;
+}
+
+.detail-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.delivery-box {
+    background-color: rgb(222, 222, 222);
+}
+
+.delivery-header {
+    font-weight: 600;
+    background-color: rgb(231, 231, 231);
+    padding: 20px;
+}
+
+.delivery-detail {
+    margin-left: 5%;
+    padding: 20px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+}
+
+.return-box {
+    background-color: rgb(222, 222, 222);
+    margin-top: 5%;
+}
+
+.return-header {
+    font-weight: 600;
+    background-color: rgb(231, 231, 231);
+    padding: 20px;
+}
+
+.return-detail {
+    margin-left: 5%;
+    padding: 20px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+}
+
+.summary {
+    width: 40%;
+}
+
+.address {
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+.button button {
+    outline: none;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #f1b76000;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    margin: 20px;
+}
+
+.summary-box {
+    color: black;
+    width: 40%;
+}
+
+.summary-header {
+    font-weight: 600;
+    padding-bottom: 20px;
+}
+
+.underline {
+    border-bottom: 1px solid rgba(178, 178, 178, 0.656);
+}
+
+.summary-container {
+    display: flex;
+}
+
+.summary-container img {
+    height: 150px;
+}
+
+.summary-detail {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.summary-box {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.header-name {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.summaryName {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    /* margin-top: 5%;
+    margin-left: 10%; */
+}
+
+.price-detail {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+.rent-button {
+    background-color: #636669;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.edit-detail {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-detail .name {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.name input {
+    width: 15vw;
+    height: 35px;
+    outline: none;
+    border: none;
+}
+
+.edit-detail .contract {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.contract input {
+    width: 15vw;
+    height: 35px;
+    outline: none;
+    border: none;
+}
+
+.edit-detail .address {
+    margin-top: 20px;
+}
+
+.address input {
+    width: 99%;
+    height: 35px;
+    outline: none;
+    border: none;
+}
+
+.cancel-button {
+    width: 75px;
+    height: 35px;
+    border: 1px solid #636669;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.save-button {
+    width: 75px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #636669;
+    border: 1px solid #636669;
+    color: white;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.edit-detail .confirm-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}

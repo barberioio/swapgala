@@ -1,0 +1,105 @@
+.navbar {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #F1B660;
+    height: 20vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+}
+
+.header {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 27px;
+    font-weight: 600;
+    display: flex;
+    margin-bottom: 30px;
+    align-items: center;
+    text-decoration: none;
+}
+
+.menu-bar {
+    background-color: #F1B660;
+    overflow: hidden;
+    width: 80vw;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.menu-bar a{
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 2px 12px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.menu-bar a:hover{
+    background-color: #A38166;
+    color: white;
+}
+
+.menu-bar a.active{
+    background-color: #A38166;
+    color: white;
+}
+
+.userContainer{
+    width: 90vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.userContainer .icon {
+    margin-left: 3%;
+    cursor: pointer;
+    position: relative;
+}
+
+.cart-list {
+    position: absolute;
+    background-color: white;
+    border-radius: 5px;
+    left: -30vw;
+    color: black;
+    padding: 10px;
+    /* width: 30vw;
+    height: 30vh; */
+}
+
+.item {
+    display: flex;
+    width: 30vw;
+}
+.item-name{
+    margin-top: 15px;
+}
+.item-size{
+    margin-top: 10px;
+}
+
+.item-img img {
+    height: 150px;
+}
+
+.item-detail {
+    width: 70%;
+}
+.button-checkout {
+    outline: none;
+    width: 100%;
+    text-align: center;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+    background-color: #A38166;
+    color: white;
+    cursor: pointer;
+    
+}

@@ -1,0 +1,28 @@
+.headerItem {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+    margin-left: 3%;
+    margin-top: 7%;
+}
+
+.itemBox{
+    
+    margin-bottom: 0;
+    padding: 10px;
+    /* align-items: center; */
+    color: black;
+    
+}
+.itemName {
+    margin-top: 15%;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    text-align: left;
+}
+.itemPrice{
+    margin-top: 5%;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    text-align: left;
+}
+

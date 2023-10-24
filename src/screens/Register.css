@@ -1,0 +1,82 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600&display=swap');
+
+html { scroll-behavior: smooth; }
+
+.registerpage{  
+    height: 100vh;
+    width: 100%;
+    background: #F1B660;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 22px;
+    color: white;   
+}
+.register{
+  margin-right: 27%;
+  
+}
+.headregis{  
+  background: #F1B660;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 48px;
+  margin-right: 5%;
+  margin-bottom: 10%;
+  color: white;   
+}
+
+.username ,.password{
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color:white;
+  border: none;
+  height: 50px;
+  width: 400px;
+  margin: 10px ;
+  margin-top: 7%;
+  padding: 0 10px;
+  font-size: 1rem;
+  outline: none;
+  transition: .5s;
+  cursor: pointer;
+  background: transparent;
+}
+
+.regisbutton{
+  font-family: 'Plus Jakarta Sans', sans-serif;
+    background:#fff;
+    text-align: center;
+  color: #F1B660;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: 202px;
+  margin-top: 10%;
+  margin-left: 30%;
+  font-size: 20px;
+  border-radius: 60px;
+  transition: .5s;
+  padding: 15px 0px;
+  cursor: pointer;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0);
+  
+}
+.regisbutton:hover{
+    color:#fff;
+  background: #A38166;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.underline-register {
+  margin-top: -3%;
+  width: 550px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.656);
+}

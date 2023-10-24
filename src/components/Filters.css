@@ -1,0 +1,128 @@
+html {scroll-behavior: smooth;}
+.filterCatalog{
+  width: 20%;
+}
+.headFilter{
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: rgb(104, 104, 104);
+    font-size: 15px;
+    display: flex;
+    justify-content: left;
+    margin-top: 15%;
+    margin-bottom: 12%;
+}
+.filter{
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: black;
+    margin-top: 2.5%;
+    /* margin-left: 55%; */
+    font-size: 25px;
+}
+
+.underlineCatalog {
+    /* width: 250px; */
+    margin-top: 6%;
+    margin-bottom: 6%;
+    border-bottom: 1px solid rgba(150, 150, 150, 0.656);
+  }
+
+ .topic{
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: black;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    font-size: 15px;
+}
+.sizeFilter{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;    
+   
+}
+.sizeFilter a{
+    padding-top: 0;
+    text-align: center;
+    line-height: 35px;
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 9999px;
+    display: block;
+    border: 1px solid rgb(166, 164, 164);
+    margin-right:30px;
+    margin-bottom: 10px;
+}
+
+.sizeFilter a:hover{
+    background-color: #A38166;
+    color: white;
+}
+
+.sizeFilter a.active{
+    background-color: #A38166;
+    color: white;
+}
+
+.minMargin{
+    margin-left: 15px;
+    margin-right: 15px;
+    height: 35px;
+    width: 30%;
+    border-radius: 5px;
+    border: 1px solid #848383;
+}
+.maxMargin{
+    margin-left: 10px;
+    margin-right: 15px;
+    height: 35px;
+    width: 30%;
+    border-radius: 5px;
+    border: 1px solid #848383;
+}
+.min-price{
+    display: inline-block;
+    max-width: 100%;
+    font-size: 15px;
+}
+.max-price{
+    display: inline-block;
+    max-width: 100%;
+    font-size: 15px;
+}
+.columnPrice{
+    font-size: 15px;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    width: 50%;
+}
+.colorFilter{
+    padding-top: 0;
+    display: block;
+    margin-bottom: 20px;
+     
+}
+.colorFilter a{
+    margin-bottom: 20%px; 
+    margin-right: 20px;
+}
+.occasion p{
+display:flex; 
+align-items: center; 
+cursor: pointer;
+}
+.topicOccasion{
+    font-size: 15px;
+    margin-top: 10%;
+}
+.occasionType{
+    margin-left: 2%;
+    font-size: 15px;
+    color: #555555;
+}
+.footer{
+    position: fixed;
+    background-color: #848383;
+    padding: 8px;
+}
