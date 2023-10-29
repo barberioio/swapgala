@@ -30,7 +30,7 @@ app.get('/dress', getDresses);
 app.get('/dress/:id', getDressById);
 app.get('/dress/item/:DressCode', getDressByDressCode);
 
-app.post('/rent/:id', saveRental);
+app.post('/rent', saveRental);
 
 app.get('/order/:id', getRentalsByUser)
 

@@ -2,33 +2,52 @@ const mongoose = require('mongoose');
 const { Dress } = require('./dress');
 const { User } = require('../authentication');
 const { Order } = require('./order');
+const { Address } = require('./address');
 const jwt = require('jsonwebtoken');
+const { ObjectId } = require('mongodb');
 
 const RentalSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
-  dress: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Dress',
-  },
-  dressName: String,        
-  dressDescribe: String,   
-  retailPrice: Number,      
-  sizeRent: String,         
-  confirm: Boolean,
-  totalDays: Number,
-  rentalDate: Date,
-  returnDate: Date,
-  totalPrice: Number,
+  Items: [
+    {
+      dressId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Dress',
+        required: true,
+      },
+      totalDays: {
+        type: Number,
+        required: true,
+      },
+      rentalDate: {
+        type: Date,
+        required: true,
+      },
+      returnDate: {
+        type: Date,
+        required: true,
+      },
+      dressName: String,
+      dressDescribe: String,
+      retailPrice: Number,
+      size: String,
+      totalPrice: Number,
+    },
+  ],  
+  addressOrder: {
+    type: String,
+    require: true,
+    ref: 'Address'
+  }
 });
 
 const Rental = mongoose.model('Rental', RentalSchema);
 
 const saveRental = async (req, res) => {
-  const dressId = req.params.id;
-  const { confirm, totalDays, rentalDate, returnDate, size } = req.body;
+  const { Items } = req.body;
   const token = req.headers['authorization'].split(' ')[1];
   const decoded = jwt.decode(req.headers['authorization'].split(' ')[1]);
   const user = await User.findById(decoded.id);
@@ -38,7 +57,6 @@ const saveRental = async (req, res) => {
       message: 'Unauthorized. Please log in first.',
     });
   }
-
   if (!user) {
     return res.status(401).json({
       message: 'User not found.',
@@ -52,9 +70,21 @@ const saveRental = async (req, res) => {
         token,
       });
     }
-    if (confirm === true) {
-      try {
+
+    if (Items.length === 0) {
+      return res.status(400).json({
+        message: 'Cart is empty. Please add items to your cart before renting.',
+      });
+    }
+
+    try {
+      const rentalItems = [];
+      let totalRentPrice = 0;
+
+      for (const item of Items) {
+        const { dressId, totalDays, rentalDate, returnDate, size } = item;
         const dress = await Dress.findById(dressId);
+
         if (!dress) {
           return res.status(404).json({
             message: 'Dress not found. Please check the ID.',
@@ -88,40 +118,42 @@ const saveRental = async (req, res) => {
           });
         }
 
-        // Create the Rental
+        // Create a Rental item
         const rentItem = new Rental({
           user: user._id,
-          dress: dressId,
-          dressName: dress.DressName,
-          dressDescribe: dress.DressDescription,
-          retailPrice: dress.RetailsPrice,
-          sizeRent: size,
-          confirm,
-          totalDays,
-          rentalDate,
-          returnDate,
-          totalPrice: pricePerDay,
+          Items: [{
+            dressId,
+            totalDays,
+            rentalDate,
+            returnDate,
+            dressName: dress.DressName,
+            dressDescribe: dress.DressDescription,
+            retailPrice: dress.RetailsPrice,
+            size,
+            totalPrice: pricePerDay,
+          }]
         });
 
         await rentItem.save();
 
-        res.status(201).json({
-          message: 'Rent successfully.',
-          rentItem
-        });
-      } catch (error) {
-        console.error(error);
-        res.status(500).json({
-          message: 'An error occurred while registering the rental.',
-        });
+        rentalItems.push(rentItem);
+        totalRentPrice += pricePerDay;
       }
-    } else {
-      res.status(400).json({
-        message: 'Confirmation is required to register a rental.',
+
+      res.status(201).json({
+        message: 'Rent successfully.',
+        rentalItems,
+        totalRentPrice,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message: 'An error occurred while registering the rentals.',
       });
     }
   });
 };
+
 
 const getRentalsByUser = async (req, res) => {
   const userId = req.params.id;
@@ -160,8 +192,9 @@ const getRentalsByUser = async (req, res) => {
   }
 };
 
+
 module.exports = {
-  Rental,
   saveRental,
   getRentalsByUser,
+  Rental,
 };
