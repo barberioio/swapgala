@@ -35,6 +35,7 @@ const RentalSchema = new mongoose.Schema({
       retailPrice: Number,
       size: String,
       totalPrice: Number,
+      isRent: Boolean, // Added a field to store whether the dress is rented
     },
   ],  
   addressOrder: {
@@ -57,6 +58,7 @@ const saveRental = async (req, res) => {
       message: 'Unauthorized. Please log in first.',
     });
   }
+
   if (!user) {
     return res.status(401).json({
       message: 'User not found.',
@@ -97,6 +99,9 @@ const saveRental = async (req, res) => {
           });
         }
 
+        dress.isRent = true; // Mark the dress as rented
+        await dress.save();
+
         let pricePerDay;
         if (totalDays === 4) {
           pricePerDay = dress.PriceForRent4Days;
@@ -117,34 +122,40 @@ const saveRental = async (req, res) => {
             message: 'Size not available for this dress.',
           });
         }
-
-        // Create a Rental item
-        const rentItem = new Rental({
-          user: user._id,
-          Items: [{
-            dressId,
-            totalDays,
-            rentalDate,
-            returnDate,
-            dressName: dress.DressName,
-            dressDescribe: dress.DressDescription,
-            retailPrice: dress.RetailsPrice,
-            size,
-            totalPrice: pricePerDay,
-          }]
+        
+        // Add the dress item to rentalItems array
+        rentalItems.push({
+          dressId,
+          totalDays,
+          rentalDate,
+          returnDate,
+          dressName: dress.DressName,
+          dressDescribe: dress.DressDescription,
+          retailPrice: dress.RetailsPrice,
+          size,
+          totalPrice: pricePerDay,
+          isRent: true,
         });
 
-        await rentItem.save();
-
-        rentalItems.push(rentItem);
         totalRentPrice += pricePerDay;
       }
 
-      res.status(201).json({
-        message: 'Rent successfully.',
-        rentalItems,
-        totalRentPrice,
+      // Create a Rental item with the array of dress items
+      const rentItem = new Rental({
+        user: user._id,
+        Items: rentalItems, // Add the array of dress items
       });
+
+      await rentItem.save();
+
+      // Prepare the response JSON in the desired format
+      const response = {
+        message: 'Rent successfully.',
+        rentalItems: rentItem.Items,
+        totalRentPrice,
+      };
+
+      res.status(201).json(response);
     } catch (error) {
       console.error(error);
       res.status(500).json({
@@ -153,7 +164,6 @@ const saveRental = async (req, res) => {
     }
   });
 };
-
 
 const getRentalsByUser = async (req, res) => {
   const userId = req.params.id;
