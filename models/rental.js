@@ -4,7 +4,6 @@ const { User } = require('../authentication');
 const { Order } = require('./order');
 const { Address } = require('./address');
 const jwt = require('jsonwebtoken');
-const { ObjectId } = require('mongodb');
 
 const RentalSchema = new mongoose.Schema({
   user: {
@@ -35,20 +34,47 @@ const RentalSchema = new mongoose.Schema({
       retailPrice: Number,
       size: String,
       totalPrice: Number,
-      isRent: Boolean, // Added a field to store whether the dress is rented
+      isRent: Boolean,
     },
   ],  
-  addressOrder: {
-    type: String,
-    require: true,
-    ref: 'Address'
-  }
+  addressOrder: [
+    {
+      firstName: {
+        type: String,
+        required: true,
+      },
+      lastName: {
+        type: String,
+        required: true,
+      },
+      mobilePhone: {
+        type: Number,
+        required: true,
+      },
+      orderEmail: {
+        type: String,
+        ref: 'User',
+      },
+      address: {
+        type: String,
+        required: true,
+      },
+      province: {
+        type: String,
+        required: true,
+      },
+      postcode: {
+        type: Number,
+        required: true,
+      },
+    }
+  ]
 });
 
 const Rental = mongoose.model('Rental', RentalSchema);
 
 const saveRental = async (req, res) => {
-  const { Items } = req.body;
+  const { Items, addressOrder } = req.body;
   const token = req.headers['authorization'].split(' ')[1];
   const decoded = jwt.decode(req.headers['authorization'].split(' ')[1]);
   const user = await User.findById(decoded.id);
@@ -99,9 +125,6 @@ const saveRental = async (req, res) => {
           });
         }
 
-        dress.isRent = true; // Mark the dress as rented
-        await dress.save();
-
         let pricePerDay;
         if (totalDays === 4) {
           pricePerDay = dress.PriceForRent4Days;
@@ -122,8 +145,11 @@ const saveRental = async (req, res) => {
             message: 'Size not available for this dress.',
           });
         }
-        
-        // Add the dress item to rentalItems array
+
+        // Mark the dress as rented
+        dress.isRent = true;
+        await dress.save();
+
         rentalItems.push({
           dressId,
           totalDays,
@@ -140,18 +166,23 @@ const saveRental = async (req, res) => {
         totalRentPrice += pricePerDay;
       }
 
-      // Create a Rental item with the array of dress items
+      // Create and save the Address object
+      const newAddress = new Address(addressOrder);
+      const savedAddress = await newAddress.save();
+
+      // Create a Rental item with the array of dress items and reference to the saved Address
       const rentItem = new Rental({
         user: user._id,
-        Items: rentalItems, // Add the array of dress items
+        Items: rentalItems,
+        addressOrder: savedAddress,
       });
 
       await rentItem.save();
 
-      // Prepare the response JSON in the desired format
       const response = {
         message: 'Rent successfully.',
         rentalItems: rentItem.Items,
+        addressOrder: savedAddress,
         totalRentPrice,
       };
 
@@ -187,7 +218,6 @@ const getRentalsByUser = async (req, res) => {
       isReturn: false
     });
     await order.save();
-    
 
     res.status(200).json({
       message: 'Rentals successfully.',
@@ -201,7 +231,6 @@ const getRentalsByUser = async (req, res) => {
     });
   }
 };
-
 
 module.exports = {
   saveRental,
