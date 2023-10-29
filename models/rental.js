@@ -36,7 +36,8 @@ const RentalSchema = new mongoose.Schema({
       totalPrice: Number,
       isRent: Boolean,
     },
-  ],  
+  ], 
+  totalRentPrice: Number, 
   addressOrder: [
     {
       firstName: {
@@ -166,15 +167,14 @@ const saveRental = async (req, res) => {
         totalRentPrice += pricePerDay;
       }
 
-      // Create and save the Address object
       const newAddress = new Address(addressOrder);
       const savedAddress = await newAddress.save();
 
-      // Create a Rental item with the array of dress items and reference to the saved Address
       const rentItem = new Rental({
         user: user._id,
         Items: rentalItems,
         addressOrder: savedAddress,
+        totalRentPrice
       });
 
       await rentItem.save();
@@ -209,11 +209,21 @@ const getRentalsByUser = async (req, res) => {
       });
     }
 
-    const totalRentPrice = rentals.reduce((total, rental) => total + rental.totalPrice, 0);
+    const totalRentPrice = rentals.reduce((total, rental) => total + rental.totalRentPrice, 0);
+
+    if (isNaN(totalRentPrice)) {
+      return res.status(400).json({
+        message: 'Error calculating the total rent price.',
+      });
+    }
+
+    const vat = totalRentPrice * 0.07;
+    const deposit = totalRentPrice * 0.20;
+    const totalPrice = totalRentPrice + vat + deposit;
 
     const order = new Order({
       user: userId,
-      totalPrice: totalRentPrice,
+      totalPrice: totalPrice,
       isPaid: false,
       isReturn: false
     });
@@ -222,7 +232,7 @@ const getRentalsByUser = async (req, res) => {
     res.status(200).json({
       message: 'Rentals successfully.',
       rentals,
-      totalRentPrice,
+      totalPrice, // Send the calculated total rent price in the response
     });
   } catch (error) {
     console.error(error);
@@ -231,6 +241,7 @@ const getRentalsByUser = async (req, res) => {
     });
   }
 };
+
 
 module.exports = {
   saveRental,
