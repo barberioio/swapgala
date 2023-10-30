@@ -6,6 +6,7 @@ import emailPic from "../picture/emailPic.png";
 import passwordPic from "../picture/passwordPic.png";
 import hidepass from "../picture/hidepass.png";
 import { Link, useNavigate } from "react-router-dom";
+import Popup from "reactjs-popup";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -14,18 +15,28 @@ function Register() {
   const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
 
+  const modal = document.querySelector("#modal");
+  const openModal = document.querySelector("#openModal");
+  const closeModal = document.querySelector("#closeModal");
+
   const handleRegister = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/register', {
+      const response = await axios.post("http://localhost:3000/register", {
         email: email,
         password: password,
       });
       // Check the status code
-    console.log(response)
-    } catch (error) {
-      console.log("gunnnnnnnnnnn")
-    }
+      console.log(response);
+    } catch (error) {}
   };
+
+  if (modal) {
+    openModal &&
+      openModal.addEventListener("click", () => modal.showModal());
+  
+    closeModal &&
+      closeModal.addEventListener("click", () => modal.close());
+  }
 
   return (
     <div className="registerpage">
@@ -65,19 +76,22 @@ function Register() {
           <div className="underline-register"></div>
         </div>
         {isError && <div>error</div>}
-        <div
-          className="regisbutton"
-          onClick={() => {
+        
+        <button id="openModal"onClick={() => {
             if (password === rePassword) {
               setIsError(false);
               handleRegister();
             } else {
               setIsError(true);
             }
-          }}
-        >
-          Create Account
-        </div>
+          }}>Create Account</button>
+
+        <dialog id="modal">
+          <p>
+          User registered successfully.
+          </p>
+          <Link to="/login"><button id="closeModal">Login</button></Link>
+        </dialog>
       </div>
     </div>
   );

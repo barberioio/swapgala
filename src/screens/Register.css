@@ -47,7 +47,7 @@ html { scroll-behavior: smooth; }
   background: transparent;
 }
 
-.regisbutton{
+button#openModal{
   font-family: 'Plus Jakarta Sans', sans-serif;
     background:#fff;
     text-align: center;
@@ -66,7 +66,7 @@ html { scroll-behavior: smooth; }
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0);
   
 }
-.regisbutton:hover{
+button:hover{
     color:#fff;
   background: #A38166;
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -79,4 +79,39 @@ html { scroll-behavior: smooth; }
   margin-top: -3%;
   width: 550px;
   border-bottom: 2px solid rgba(255, 255, 255, 0.656);
+}
+
+dialog:modal {
+  background-color: rgb(255, 255, 255);
+  padding: 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5rem 0.25rem;
+  position: relative;
+}
+dialog::backdrop {
+  background: hsl(0 0% 0% / 50%);
+}
+
+
+dialog-close-btn {
+  font-size: .75em;
+  position: absolute;
+  top: .25em;
+  right: .25em;
+}
+
+button#closeModal{
+  font-family: 'Plus Jakarta Sans', sans-serif;
+    text-align: center;
+  color: #ffffff;
+  background-color: #F1B660;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: 100px;
+  font-size: 20px;
+  border-radius: 60px;
+  padding: 10px 0px;
+  cursor: pointer;
 }

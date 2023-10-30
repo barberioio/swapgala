@@ -21,18 +21,46 @@
     right: 40px;
     width: 60px;
     height: 60px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .chatbot{
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
         position: absolute;
         margin-left: auto;
-        width: 100px;
+        left: -250px;
+        top: -310px;
+        width: 320px;
+        height: 380px;
         align-items: flex-start;
         justify-content: flex-start;
-        background-color: rgb(0, 0, 0);
-        border-radius: 5px;
-        color: black;
-        padding: 10px;
+        background-color: #F1B660;
+        border-radius: 10px;
+        border-color: black;
+        color: rgb(0, 0, 0);
     }
 
+.closeToggle img{
+    right: 100px;
+    width: 15px;
+    height: 15px;
+}
+.box-chat{
+    background-color: rgba(255, 255, 255, 0.509);
+    width: 70%;
+    height: 75%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.656);
+    border-top: 1px solid rgba(255, 255, 255, 0.656);
+}
+.reply{
+    background-color: white;
+    width: 83%;
+    height: 80%;
+    margin-top: 7px;
+    margin-left: 10px;
+    border-radius: 50px;
+}
