@@ -198,6 +198,10 @@ html {
     align-items: center;
     cursor: pointer;
 }
+.cancel-button:hover{
+    color: #FFFFFF;
+    background-color: #898b8c;
+}
 
 .save-button {
     width: 75px;
@@ -205,11 +209,14 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #636669;
     border: 1px solid #636669;
-    color: white;
+    color: black;
     margin-left: 20px;
     cursor: pointer;
+}
+.save-button:hover{
+    color: #FFFFFF;
+    background-color: #898b8c;
 }
 
 .edit-detail .confirm-button {
@@ -217,3 +224,13 @@ html {
     justify-content: flex-end;
     margin-top: 30px;
 }
+
+.rent-button{
+background-color:  #F1B660;
+border-radius: 5px;
+}
+
+.rent-button:hover{
+    background-color:  #75726e;
+    border-radius: 5px;
+    }

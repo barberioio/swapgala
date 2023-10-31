@@ -11,7 +11,7 @@ import send from "../picture/send.png";
 
 function Catalog() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const cors = require('cors');
   const toggleChat = () => {
     setIsOpen(!isOpen);
   };
@@ -27,19 +27,20 @@ function Catalog() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [size, minPrice, maxPrice, color, occasion]);
 
   const fetchData = async () => {
     try {
       const params = {
+        minPrice: minPrice,
         maxPrice: maxPrice,
         color: color,
         occasion: occasion,
-        minPrice: minPrice,
         size: size,
       };
       const response1 = await axios.get("http://localhost:3000/dress", {
         params: params,
+        withCredentials: true,
       });
       setCatalogList(response1.data);
     } catch (error) {

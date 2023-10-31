@@ -1,19 +1,16 @@
-.rent{
-    overflow-y: scroll;
-}
+
 .contentContainer {
     display: flex;
     justify-content: center;
-    height: 80vh;
-
+    height: 100%;
 }
 
 .content {
     width: 80%;
+    margin-bottom: 10%;
     display: flex;
     justify-content: space-evenly;
     align-items: flex-end;
-    
 }
 
 .small-img {
@@ -21,6 +18,7 @@
     display: flex;
     flex-direction: column;
     height: 70vh;
+    overflow-y: scroll;
 }
 
 .small-img img {

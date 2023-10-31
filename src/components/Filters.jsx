@@ -33,7 +33,7 @@ export default function Filters(props) {
         <div className="sizeFilter">
           <a
             onClick={() => {
-              haddleFileter("2XS", "SIZE");
+              haddleFileter("XXS", "SIZE");
             }}
           >
             2XS
@@ -75,14 +75,14 @@ export default function Filters(props) {
           </a>
           <a
             onClick={() => {
-              haddleFileter("2XL", "SIZE");
+              haddleFileter("XXL", "SIZE");
             }}
           >
             2XL
           </a>
           <a
             onClick={() => {
-              haddleFileter("3XL", "SIZE");
+              haddleFileter("XXXL", "SIZE");
             }}
           >
             3XL
@@ -103,7 +103,7 @@ export default function Filters(props) {
         <input
           type="number"
           className="minMargin"
-          placeholder="BAHT"
+              
           onChange={(e) => {
             haddleFileter(e.target.value, "MINPRICE");
           }}
@@ -115,7 +115,6 @@ export default function Filters(props) {
         <input
           type="number"
           className="maxMargin"
-          placeholder="฿ 10000"
           onChange={(e) => {
             haddleFileter(e.target.value, "MAXPRICE");
           }}
@@ -125,7 +124,7 @@ export default function Filters(props) {
         <div className="colorFilter">
           <a
             onClick={() => {
-              haddleFileter("black", "COLOR");
+              haddleFileter("BLACK", "COLOR");
             }}
           >
             <img src={black}></img>
@@ -133,7 +132,7 @@ export default function Filters(props) {
           <a
             
             onClick={() => {
-              haddleFileter("gray", "COLOR");
+              haddleFileter("GRAY", "COLOR");
             }}
           >
             <img src={gray}></img>
@@ -141,7 +140,7 @@ export default function Filters(props) {
           <a
             
             onClick={() => {
-              haddleFileter("white", "COLOR");
+              haddleFileter("WHITE", "COLOR");
             }}
           >
             <img src={white}></img>
@@ -149,7 +148,7 @@ export default function Filters(props) {
           <a
            
             onClick={() => {
-              haddleFileter("egg", "COLOR");
+              haddleFileter("EGG", "COLOR");
             }}
           >
             <img src={egg}></img>
@@ -157,7 +156,7 @@ export default function Filters(props) {
           <a
             
             onClick={() => {
-              haddleFileter("brown", "COLOR");
+              haddleFileter("BROWN", "COLOR");
             }}
           >
             <img src={brown}></img>
@@ -165,7 +164,7 @@ export default function Filters(props) {
           <a
           
             onClick={() => {
-              haddleFileter("red", "COLOR");
+              haddleFileter("RED", "COLOR");
             }}
           >
             <img src={red}></img>
@@ -173,7 +172,7 @@ export default function Filters(props) {
           <a
      
             onClick={() => {
-              haddleFileter("orange", "COLOR");
+              haddleFileter("ORANGE", "COLOR");
             }}
           >
             <img src={orange}></img>
@@ -181,7 +180,7 @@ export default function Filters(props) {
           <a
             
             onClick={() => {
-              haddleFileter("yellow", "COLOR");
+              haddleFileter("YELLOW", "COLOR");
             }}
           >
             <img src={yellow}></img>
@@ -189,7 +188,7 @@ export default function Filters(props) {
           <a
        
             onClick={() => {
-              haddleFileter("green", "COLOR");
+              haddleFileter("GREEN", "COLOR");
             }}
           >
             <img src={green}></img>
@@ -197,7 +196,7 @@ export default function Filters(props) {
           <a
    
             onClick={() => {
-              haddleFileter("blue", "COLOR");
+              haddleFileter("BLUE", "COLOR");
             }}
           >
             <img src={blue}></img>
@@ -205,7 +204,7 @@ export default function Filters(props) {
           <a
         
             onClick={() => {
-              haddleFileter("darkblue", "COLOR");
+              haddleFileter("NAVY BLUE", "COLOR");
             }}
           >
             <img src={darkblue}></img>
@@ -213,7 +212,7 @@ export default function Filters(props) {
           <a
            
             onClick={() => {
-              haddleFileter("purple", "COLOR");
+              haddleFileter("PUEPLE", "COLOR");
             }}
           >
             <img src={purple}></img>
@@ -221,7 +220,7 @@ export default function Filters(props) {
           <a
            
             onClick={() => {
-              haddleFileter("pink", "COLOR");
+              haddleFileter("PINK", "COLOR");
             }}
           >
             <img src={pink}></img>
@@ -229,7 +228,7 @@ export default function Filters(props) {
           <a
           
             onClick={() => {
-              haddleFileter("gold", "COLOR");
+              haddleFileter("GOLD", "COLOR");
             }}
           >
             <img src={gold}></img>
@@ -237,7 +236,7 @@ export default function Filters(props) {
           <a
            
             onClick={() => {
-              haddleFileter("silver", "COLOR");
+              haddleFileter("SILVER", "COLOR");
             }}
           >
             <img src={silver}></img>
@@ -251,7 +250,7 @@ export default function Filters(props) {
             <div
               className="occasionType"
               onClick={() => {
-                haddleFileter("BIRTHDAY PARTY", "OCCASION");
+                haddleFileter("BIRTHDAY", "OCCASION");
               }}
             >
               BIRTHDAY PARTY

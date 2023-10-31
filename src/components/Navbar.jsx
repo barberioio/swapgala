@@ -5,12 +5,14 @@ import swapgala2 from "../picture/swapgala2.png";
 import cart from "../picture/cart.png";
 import user from "../picture/user.png";
 import dress1 from "../picture/dress1.png";
-import { Link, useRoutes } from "react-router-dom";
+import { Link } from "react-router-dom";
 import _ from "lodash";
 import dayjs from "dayjs";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const currentPath = window.location.pathname;
+  console.log("Current Path: " + currentPath);
   const { formData, dispatch } = useFormContext();
 
   const { carts, confirm, totalDays, rentalDate, returnDate, size } = formData;
@@ -29,7 +31,13 @@ export default function Navbar() {
     <div className="navbar">
       <div className="userContainer">
         <div className="icon">
-          <img src={user}></img>
+          <div class="custom-select">
+            {isOpen ? (
+              <div className="user-history">
+                <div className="box-history"></div>
+              </div>
+            ) : null}
+          </div>
         </div>
         <div className="icon" style={{ position: "relative" }}>
           {_.size(formData.carts) > 0 && (
@@ -52,7 +60,7 @@ export default function Navbar() {
             </div>
           )}
 
-          <img src={cart} onClick={toggleCart}></img>
+          <img style={{paddingTop:"10px"}}src={cart} onClick={toggleCart}></img>
           {isOpen && _.size(formData.carts) > 0 ? (
             <div className="cart-list">
               {_.map(formData.carts, (item, index) => (
@@ -63,7 +71,9 @@ export default function Navbar() {
                   <div className="item-detail">
                     <div className="item-name">{item?.dressName}</div>
                     <div className="item-size">Size: {item?.size}</div>
-                    <div className="item-price">Price: {addCommas(item?.price)} ฿</div>
+                    <div className="item-price">
+                      Price: {addCommas(item?.price)} ฿
+                    </div>
                     <div className="item-pickup">
                       Pickup Date: {dayjs(item?.pickDate).format("YYYY-MM-DD")}
                     </div>
@@ -92,24 +102,15 @@ export default function Navbar() {
 
       <div className="menu-bar">
         <Link to="/catalog">
-          <a class="active" href="#home">
-            SALE
+          <a class={currentPath === "/catalog" && "active"} href="#home">
+            NEW ARRIVAL
           </a>
         </Link>
-        <Link to="/catalog">
-          <a href="#new">NEW ARRIVALS</a>
-        </Link>
-        <Link to="/catalog">
-          <a href="#clothing">CLOTHING</a>
-        </Link>
-        <Link to="/catalog">
-          <a href="#men">MENSWEAR</a>
-        </Link>
-        <Link to="/catalog">
-          <a href="#occasion">OCCASION</a>
-        </Link>
-        <Link to="/catalog">
-          <a href="#lookbook">LOOKBOOK</a>
+
+        <Link to="/history">
+          <a class={currentPath === "/history" && "active"} href="#lookbook">
+            RENTAL HISTORY
+          </a>
         </Link>
       </div>
     </div>

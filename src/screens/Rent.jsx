@@ -29,10 +29,13 @@ export default function Rent(props) {
 
   const { carts, confirm, totalDays, rentalDate, returnDate, size } = formData;
   const [FitVisible, setFitVisible] = useState(true);
+  const [DetailVisible , setDetailVisible] = useState(true);
   const toggleMore = () => {
     setFitVisible(!FitVisible);
   };
-
+  const toggleDetail = () => {
+    setDetailVisible(!DetailVisible);
+  };
   const fetchData = async () => {
     try {
       const response1 = await axios.get(`http://localhost:3000/dress/${id}`);
@@ -95,7 +98,7 @@ export default function Rent(props) {
   };
 
   return (
-    <div className="rent">
+    <div style={{overflowY:"scroll"}}className="rent">
       <Navbar />
       <div className="contentContainer">
         <div className="content">
@@ -139,9 +142,12 @@ export default function Rent(props) {
                   <option key={`size_${index}`} value={item}>
                     {item}
                   </option>
+                
                 ))}
+                
               </select>
             </div>
+            <br></br>
             <div className="delivery-details">
               <div>DELIVERY + RETURN DATE</div>
               <div>
@@ -168,6 +174,7 @@ export default function Rent(props) {
                   }}
                 />
                 <label for="8days">8 DAYS RENTAL</label>
+                
               </div>
               <div>
                 <input
@@ -178,9 +185,11 @@ export default function Rent(props) {
                   }}
                 />
               </div>
+              <br></br>
+              <br></br>
             </div>
             <div className={checkAddtoCart().css}>
-              <button
+              <button 
                 onClick={() => {
                   if (checkAddtoCart().canClick) {
                     handleFormSubmit();
@@ -191,6 +200,7 @@ export default function Rent(props) {
               </button>
             </div>
             <div className="product-detail">
+            <br></br>
               <div className="size">
                 <div>FIT</div>
                 <div onClick={toggleMore}>+</div>
@@ -210,14 +220,20 @@ export default function Rent(props) {
               <hr />
               <div className="product">
                 <div>PRODUCT & DETAILS</div>
-                <div>+</div>
+                <div onClick={toggleDetail}>+</div>
               </div>
-              <div>{catalogDetail?.Details}</div>
-              <hr />
+              {DetailVisible && (
+              <div>{catalogDetail?.Details}
+              </div>
+              )}
             </div>
           </div>
         </div>
+        <br></br>
+        <br></br>
+        <br></br>
       </div>
     </div>
+   
   );
 }

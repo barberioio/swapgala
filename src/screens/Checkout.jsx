@@ -13,7 +13,9 @@ export default function Checkout() {
   const [isEditReturn, setIsEditReturn] = useState(false);
   const { formData, dispatch } = useFormContext();
   const navigate = useNavigate(); 
+  const [addressOrder , setAddressOrder] =  useState("");
   const { carts, confirm, totalDays, rentalDate, returnDate, size } = formData;
+  
 
   const editDelivery = () => {
     setIsEditDelivery(!isEditDelivery);
@@ -53,7 +55,7 @@ export default function Checkout() {
     try {
       const response = await axios.post('http://localhost:3000/rent', {
         items: formData.carts,
-        addressOrder: null,
+        addressOrder: addressOrder,
       }, {
         withCredentials: true,
       });

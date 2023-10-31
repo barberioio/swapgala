@@ -32,20 +32,28 @@
 
 .menu-bar a{
     float: left;
+    width: 500px;
+    height: 50px;
     color: white;
     text-align: center;
-    padding: 2px 12px;
     text-decoration: none;
     font-size: 16px;
 }
 
 .menu-bar a:hover{
-    background-color: #A38166;
+    float: left;
+    width: 500px;
+    height: 50px;
     color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
 }
 
 .menu-bar a.active{
     background-color: #A38166;
+    width: 500px;
+    height: 50px;
     color: white;
 }
 
@@ -103,3 +111,40 @@
     cursor: pointer;
     
 }
+.user-history{
+font-family: 'Plus Jakarta Sans', sans-serif;
+font-weight: 600;
+    position: absolute;
+    margin-left: auto;
+    left: -250px;
+    top: -310px;
+    width: 320px;
+    height: 380px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: #F1B660;
+    border-radius: 10px;
+    border-color: black;
+    color: rgb(0, 0, 0);
+}
+
+.user-history{
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+        position: absolute;
+        margin-left: auto;
+        left: -200px;
+        top: 0px;
+        width: 100px;
+        height: 0px;
+        align-items: flex-start;
+        justify-content: flex-start;
+        background-color: #F1B660;
+        border-radius: 10px;
+        border-color: black;
+        color: rgb(0, 0, 0);
+    }
+    .box-history{
+        background-color: rgba(255, 255, 255, 0.509);
+    
+    }

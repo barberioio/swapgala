@@ -22,7 +22,7 @@ export default function ListItems(props) {
       {_.map(props?.data, (item, index) => (
         <div
           className="itemBox"
-          style={{ width: "200px", height: "200px", gridColumn: "span 1" }}
+          style={{ width: "200px", height: "450px", gridColumn: "span 1" }}
         >
           <Link to={`/rent/${item._id}`}>
             <img
