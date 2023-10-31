@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { validateLogin, login, validateRegister, register, verifyToken } = require('./authentication'); // Assuming your authentication code is in 'auth.js'
@@ -10,6 +11,11 @@ const { updateOrderPaymentStatus } = require('./models/order')
  
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.use(cors({
+  origin: 'http://localhost:3001', // Specify the origin of your client
+  credentials: true, // Allow credentials (e.g., cookies) to be included in the request
+}));
 
 // Connect to MongoDB   
 mongoose.connect('mongodb+srv://admin:1234@swapgala.hzxwq9h.mongodb.net/?retryWrites=true&w=majority', {
@@ -46,6 +52,7 @@ app.get('/user', verifyToken, (req, res) => {
     email,
   });
 });
+
 
 // Start the server
 app.listen(port, () => {
