@@ -124,11 +124,11 @@ const getDresses = async (req, res) => {
     }
 
     if (minPrice && maxPrice) {
-      filters.PriceForRent4Days = { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) };
+      filters.RetailsPrice = { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) };
     } else if (minPrice) {
-      filters.PriceForRent4Days = { $gte: parseInt(minPrice) };
+      filters.RetailsPrice = { $gte: parseInt(minPrice) };
     } else if (maxPrice) {
-      filters.PriceForRent4Days = { $lte: parseInt(maxPrice) };
+      filters.RetailsPrice = { $lte: parseInt(maxPrice) };
     }
 
     if (occasion) {
