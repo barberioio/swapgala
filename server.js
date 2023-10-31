@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const { validateLogin, login, validateRegister, register } = require('./authentication'); // Assuming your authentication code is in 'auth.js'
+const { validateLogin, login, validateRegister, register, verifyToken } = require('./authentication'); // Assuming your authentication code is in 'auth.js'
 const { getDresses, getDressById, getDressByDressCode } = require('./models/dress');
 const { saveRental, getRentalsByUser } = require('./models/rental');
 const { validateAddress, saveAddress } = require('./models/address')
@@ -37,6 +37,15 @@ app.get('/order/:id', getRentalsByUser)
 app.post('/address', validateAddress, saveAddress);
 
 app.put('/update/:id', updateOrderPaymentStatus)
+
+app.get('/user', verifyToken, (req, res) => {
+  const { id, email } = req.user;
+
+  res.status(200).json({
+    id,
+    email,
+  });
+});
 
 // Start the server
 app.listen(port, () => {
