@@ -31,6 +31,11 @@ const RentalSchema = new mongoose.Schema({
       },
       dressName: String,
       dressDescribe: String,
+      images: [
+        {
+          type: String,
+        },
+      ],
       retailPrice: Number,
       size: String,
       totalPrice: Number,
@@ -158,6 +163,7 @@ const saveRental = async (req, res) => {
           returnDate,
           dressName: dress.DressName,
           dressDescribe: dress.DressDescription,
+          images: dress.images,
           retailPrice: dress.RetailsPrice,
           size,
           totalPrice: pricePerDay,
