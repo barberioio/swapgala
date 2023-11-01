@@ -52,6 +52,18 @@ app.get('/user', verifyToken, (req, res) => {
 
 app.post('/chat', getChatCompletion);
 
+// app.get('/recommend', async (req, res) => {
+//   try {
+//     const userResponses = req.query.responses || req.body.responses;
+
+//     const recommendations = await getChatCompletion({ message: userResponses });
+
+//     res.json({ recommendations });
+//   } catch (error) {
+//     res.status(500).json({ error: 'An error occurred while recommending a dress.' });
+//   }
+// });
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
