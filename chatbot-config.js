@@ -86,6 +86,7 @@ async function getChatCompletion(req, res) {
           message: `Your recommended dress is ${dressName}`,
         };
         console.log(response);
+        return res.json(response);
       } else {
         // Handle the case when no matching dress is found
         console.log("No matching dress found for the given body shape");
@@ -94,8 +95,9 @@ async function getChatCompletion(req, res) {
     } else {
       // Handle the case when the regular expression doesn't match
     }
-  
-    return chatCompletion.choices;
+    
+    return res.json(chatCompletion.choices);
+    // return chatCompletion.choices;
   } catch (error) {
     console.error('OpenAI request error:', error);
     throw error;
