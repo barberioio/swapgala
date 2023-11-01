@@ -31,11 +31,7 @@ const RentalSchema = new mongoose.Schema({
       },
       dressName: String,
       dressDescribe: String,
-      images: [
-        {
-          type: String,
-        },
-      ],
+      images: String,
       retailPrice: Number,
       size: String,
       totalPrice: Number,
