@@ -61,32 +61,34 @@ async function getChatCompletion(req, res) {
       const a = findValueInExcel(excelFilePath, valuesArray);
       console.log(a);
   
-      async function findDressIdByType(a) {
-        const regex = new RegExp(a.toUpperCase(), 'i');
-      
-        return Dress.findOne({ type: regex })
-          .exec()
-          .then(matchingDress => {
-            return matchingDress ? matchingDress.dressId : null;
-          })
-          .catch(error => {
-            // Handle any errors here
-            console.error("Error finding dress by type:", error);
-            throw error;
-          });
+      async function findDressNameByType(a) {
+        try {
+          const regex = new RegExp(a.toUpperCase(), 'i');
+          const matchingDress = await Dress.findOne({ type: regex }).exec();
+          
+          if (matchingDress) {
+            return matchingDress.DressName;
+          } else {
+            return null; // Handle the case when no matching dress is found
+          }
+        } catch (error) {
+          // Handle any errors here
+          console.error("Error finding dress by type:", error);
+          throw error;
+        }
       }
       
-  
-      const dressId = await findDressIdByType(a);
-  
-      if (dressId !== null) {
+      const dressName = await findDressNameByType(a);
+      
+      if (dressName !== null) {
         const response = {
-          dressId,
-          message: `Your recommended dress is Dress ${dressId}`,
+          dressName,
+          message: `Your recommended dress is ${dressName}`,
         };
-        console.log(response)
+        console.log(response);
       } else {
-  
+        // Handle the case when no matching dress is found
+        console.log("No matching dress found for the given body shape");
       }
 
     } else {
