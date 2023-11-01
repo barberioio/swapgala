@@ -155,7 +155,6 @@ const saveRental = async (req, res) => {
         // Mark the dress as rented
         dress.isRent = true;
         await dress.save();
-        dress.images = dress.images.map((image) => image.url);
 
         rentalItems.push({
           dressId,
@@ -164,7 +163,7 @@ const saveRental = async (req, res) => {
           returnDate,
           dressName: dress.DressName,
           dressDescribe: dress.DressDescription,
-          images: dress.images,
+          images: dress.images[0],
           retailPrice: dress.RetailsPrice,
           size,
           totalPrice: pricePerDay,
