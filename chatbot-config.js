@@ -63,27 +63,21 @@ async function getChatCompletion(req, res) {
   
       async function findDressNameByType(a) {
         try {
-          const regex = new RegExp(a.toUpperCase(), 'i');
-          const matchingDress = await Dress.findOne({ type: regex }).exec();
-          
-          if (matchingDress) {
-            return matchingDress.DressName;
-          } else {
-            return null; // Handle the case when no matching dress is found
-          }
+          const regex = new RegExp(a, 'i');
+          const dressesMatchingQuery = await Dress.find({ type: regex }).exec();
+          return dressesMatchingQuery;
         } catch (error) {
-          // Handle any errors here
           console.error("Error finding dress by type:", error);
           throw error;
         }
       }
+      
       
       const dressName = await findDressNameByType(a);
       
       if (dressName !== null) {
         const response = {
           dressName,
-          message: `Your recommended dress is ${dressName}`,
         };
         console.log(response);
         return res.json(response);
