@@ -4,12 +4,10 @@ const OrderSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
   },
   rentId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Rental',
-    required: true,
   },
   totalPrice: Number,
   isPaid: Boolean,
