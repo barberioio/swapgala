@@ -229,6 +229,7 @@ const getRentalsByUser = async (req, res) => {
 
     const order = new Order({
       user: userId,
+      rentId: rentals._id,
       totalPrice: totalPrice,
       isPaid: false,
       isReturn: false

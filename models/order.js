@@ -4,6 +4,12 @@ const OrderSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
+    required: true,
+  },
+  rentId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Rental',
+    required: true,
   },
   totalPrice: Number,
   isPaid: Boolean,
@@ -17,11 +23,11 @@ const OrderSchema = new mongoose.Schema({
 const Order = mongoose.model('Order', OrderSchema);
 
 const updateOrderPaymentStatus = async (req, res) => {
-  const orderId = req.params.id;
+  const rentId = req.params.id;
   const { isPaid, isReturn } = req.body;
 
   try {
-    const existingOrder = await Order.findById(orderId);
+    const existingOrder = await Order.findById(rentId);
 
     if (!existingOrder) {
       return res.status(404).json({
