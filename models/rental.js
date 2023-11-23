@@ -227,9 +227,11 @@ const getRentalsByUser = async (req, res) => {
     const deposit = totalRentPrice * 0.20;
     const totalPrice = totalRentPrice + vat + deposit;
 
+
+
     const order = new Order({
       user: userId,
-      rentId: rentals._id,
+      rentId: rentals[rentals.length -1]._id,
       totalPrice: totalPrice,
       isPaid: false,
       isReturn: false

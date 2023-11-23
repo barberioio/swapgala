@@ -25,7 +25,7 @@ const updateOrderPaymentStatus = async (req, res) => {
   const { isPaid, isReturn } = req.body;
 
   try {
-    const existingOrder = await Order.findById(rentId);
+    const existingOrder = await Order.findOne({rentId:rentId});
 
     if (!existingOrder) {
       return res.status(404).json({
