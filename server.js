@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { validateLogin, login, validateRegister, register, verifyToken } = require('./authentication');
-const { getDresses, getDressById, getDressByDressCode, addDressStock } = require('./models/dress');
+const { getDresses, getDressById, getDressByDressCode, addDressStock, updateDress, deleteDress } = require('./models/dress');
 const { saveRental, getRentalsByUser } = require('./models/rental');
 const { validateAddress, saveAddress } = require('./models/address');
 const { updateOrderPaymentStatus } = require('./models/order');
@@ -41,6 +41,8 @@ app.get('/dress', getDresses);
 app.get('/dress/:id', getDressById);
 app.get('/dress/item/:DressCode', getDressByDressCode);
 app.post('/add/dress', addDressStock);
+app.put('/update/:id', updateDress);
+app.delete('/delete/:id', deleteDress);
 
 
 app.post('/rent', saveRental);

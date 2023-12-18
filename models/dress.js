@@ -252,10 +252,130 @@ const addDressStock = async (req, res) => {
   }
 };
 
+const updateDress = async (req, res) => {
+  try {
+    const token = req.headers['authorization']?.split(' ')[1];
+
+    if (!token) {
+      return res.status(401).json({
+        message: 'Unauthorized. Please log in first.',
+      });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id);
+
+    if (!user || user.role !== 'admin') {
+      return res.status  (403).json({
+        message: 'Permission denied. Only admins can update dresses.',
+      });
+    }
+
+    const dressId = req.params.id;
+    const {
+      DressCode,
+      DressName,
+      DressDescription,
+      PriceForRent4Days,
+      PriceForRent8Days,
+      RetailsPrice,
+      size,
+      RecommendFromStylish,
+      Fit,
+      Details,
+      images,
+      type,
+      color,
+      occasion,
+    } = req.body;
+
+    const updatedDress = await Dress.findByIdAndUpdate(
+      dressId,
+      {
+        $set: {
+          DressCode,
+          DressName,
+          DressDescription,
+          PriceForRent4Days,
+          PriceForRent8Days,
+          RetailsPrice,
+          size,
+          RecommendFromStylish,
+          Fit,
+          Details,
+          images,
+          type,
+          color,
+          occasion,
+        },
+      },
+      { new: true }
+    );
+
+    if (!updatedDress) {
+      return res.status(404).json({
+        message: 'Dress not found. Please check the ID.',
+      });
+    }
+
+    res.status(200).json({
+      updatedDress,
+      message: 'Dress updated successfully.',
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'An error occurred while updating the dress.',
+    });
+  }
+};
+
+const deleteDress = async (req, res) => {
+  try {
+    const token = req.headers['authorization']?.split(' ')[1];
+
+    if (!token) {
+      return res.status(401).json({
+        message: 'Unauthorized. Please log in first.',
+      });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id);
+
+    if (!user || user.role !== 'admin') {
+      return res.status(403).json({
+        message: 'Permission denied. Only admins can delete dresses.',
+      });
+    }
+
+    const dressId = req.params.id;
+    const deletedDress = await Dress.findByIdAndDelete(dressId);
+
+    if (!deletedDress) {
+      return res.status(404).json({
+        message: 'Dress not found. Please check the ID.',
+      });
+    }
+
+    res.status(200).json({
+      deletedDress,
+      message: 'Dress deleted successfully.',
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'An error occurred while deleting the dress.',
+    });
+  }
+};
+
 module.exports = {
   Dress,
   getDresses,
   getDressById,
   getDressByDressCode,
   addDressStock,
+  updateDress,
+  deleteDress,
 };
