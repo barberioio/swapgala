@@ -40,9 +40,9 @@ app.post('/register', validateRegister, register);
 app.get('/dress', getDresses);
 app.get('/dress/:id', getDressById);
 app.get('/dress/item/:DressCode', getDressByDressCode);
-app.post('/add/dress', addDressStock);
-app.put('/update/:id', updateDress);
-app.delete('/delete/:id', deleteDress);
+app.post('/stock/add/dress', addDressStock);
+app.put('/stock/update/:id', updateDress);
+app.delete('/stock/delete/:id', deleteDress);
 
 
 app.post('/rent', saveRental);
