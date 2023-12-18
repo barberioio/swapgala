@@ -12,6 +12,9 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  role: {
+    type: String,
+  }
 });
 
 const User = mongoose.model('User', UserSchema);
@@ -21,6 +24,7 @@ const generateJWTToken = (user) => {
     {
       id: user._id,
       email: user.email,
+      role: user.role
     },
     process.env.JWT_SECRET,
     {
@@ -65,6 +69,7 @@ const login = async (req, res) => {
   res.status(200).json({
     message: 'User logged in successfully.',
     token,
+    role: user.role,
   });
 };
 
@@ -107,6 +112,7 @@ const register = async (req, res) => {
   const user = new User({
     email,
     password: hashedPassword,
+    role: 'customer',
   });
 
   await user.save();
@@ -119,34 +125,10 @@ const register = async (req, res) => {
   });
 };
 
-const verifyToken = (req, res, next) => {
-  const token = req.headers['authorization'].split(' ')[1];
-  const decoded = jwt.decode(req.headers['authorization'].split(' ')[1]);
-
-  if (!token) {
-    return res.status(401).json({
-      message: 'No token provided.',
-    });
-  }
-
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) {
-      return res.status(401).json({
-        message: 'Failed to authenticate token.',
-      });
-    }
-
-    req.user = decoded;
-    next();
-  });
-};
-
-
 module.exports = {
   User,
   validateLogin,
   login,
   validateRegister,
   register,
-  verifyToken
 };

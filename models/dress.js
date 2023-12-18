@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const { User } = require('../authentication');
+const jwt = require('jsonwebtoken');
 
 const DressSchema = new mongoose.Schema({
   DressCode: {
@@ -180,10 +182,80 @@ const getDressByDressCode = async (req, res) => {
   res.status(200).json(dress);
 };
 
+const addDressStock = async (req, res) => {
+  try {
+    const token = req.headers['authorization']?.split(' ')[1];
+
+    if (!token) {
+      return res.status(401).json({
+        message: 'Unauthorized. Please log in first.',
+      });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id);
+
+    if (!user || user.role !== 'admin') {
+      return res.status(403).json({
+        message: 'Permission denied. Only admins can add dresses.',
+      });
+    }
+
+    const {
+      DressCode,
+      DressName,
+      DressDescription,
+      PriceForRent4Days,
+      PriceForRent8Days,
+      RetailsPrice,
+      size,
+      RecommendFromStylish,
+      Fit,
+      Details,
+      images,
+      type,
+      color,
+      occasion,
+    } = req.body;
+
+    const isRent = false;
+
+    const newDress = new Dress({
+      DressCode,
+      DressName,
+      DressDescription,
+      PriceForRent4Days,
+      PriceForRent8Days,
+      RetailsPrice,
+      size,
+      RecommendFromStylish,
+      Fit,
+      Details,
+      images,
+      isRent,
+      type,
+      color,
+      occasion,
+    });
+
+    const savedDress = await newDress.save();
+
+    res.status(201).json({
+      savedDress,
+      message: 'Save new dress Successfully.'
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'An error occurred while creating the dress.',
+    });
+  }
+};
+
 module.exports = {
   Dress,
   getDresses,
   getDressById,
   getDressByDressCode,
+  addDressStock,
 };
-

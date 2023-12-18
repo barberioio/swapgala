@@ -9,6 +9,7 @@
   "author": "nstta",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/storage": "^7.7.0",
     "axios": "^1.6.0",
     "bcrypt": "^5.1.1",
     "bcrypt-nodejs": "^0.0.3",
@@ -19,6 +20,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^5.9.1",
     "mongoose": "^7.6.3",
+    "multer": "^1.4.5-lts.1",
     "openai": "^4.14.2",
     "readline-sync": "^1.4.10",
     "xlsx": "^0.18.5"
