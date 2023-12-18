@@ -40,6 +40,8 @@ app.post('/register', validateRegister, register);
 app.get('/dress', getDresses);
 app.get('/dress/:id', getDressById);
 app.get('/dress/item/:DressCode', getDressByDressCode);
+app.post('/add/dress', addDressStock);
+
 
 app.post('/rent', saveRental);
 
