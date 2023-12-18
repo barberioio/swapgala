@@ -152,7 +152,6 @@ const saveRental = async (req, res) => {
           });
         }
 
-        // Mark the dress as rented
         dress.isRent = true;
         await dress.save();
 
@@ -241,7 +240,7 @@ const getRentalsByUser = async (req, res) => {
     res.status(200).json({
       message: 'Rentals successfully.',
       rentals,
-      totalPrice, // Send the calculated total rent price in the response
+      totalPrice,
     });
   } catch (error) {
     console.error(error);
