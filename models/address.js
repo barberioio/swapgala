@@ -84,27 +84,46 @@ const thailandProvinces = [
   'Phetchabun',
 ];
 
-const AddressSchema = new mongoose.Schema({
+const Address = new mongoose.Schema({
   firstName: {
     type: String,
     required: true,
+    match: /^[a-zA-Z]+$/,
+    minlength: [2, 'Last name must be at least 2 characters long.'],
+    maxlength: [50, 'Last name cannot exceed 50 characters.'],
   },
   lastName: {
     type: String,
     required: true,
+    match: /^[a-zA-Z]+$/,
+    minlength: [2, 'Last name must be at least 2 characters long.'],
+    maxlength: [50, 'Last name cannot exceed 50 characters.'],
   },
   mobilePhone: {
     type: Number,
     required: true,
+    validate: {
+      validator: function(value) {
+        return /^\d{10}$/.test(value);
+      },
+      message: props => `${props.value} is not a valid 10-digit phone number!`,
+    },
   },
   orderEmail: {
     type: mongoose.Schema.Types.String,
     ref: 'User',
-    require: true
+    require: true,
   },
   address: {
     type: String,
     required: true,
+    validate: {
+      validator: function(value) {
+        return /^[\w\d\s.,-]+$/i.test(value);
+      },
+      message: props => 'Address can only contain alphabet, numbers, spaces, and special characters.',
+    },
+    minlength: [15, 'Address must be at least 15 characters long.'],
   },
   province: {
     type: String,
@@ -114,11 +133,14 @@ const AddressSchema = new mongoose.Schema({
   postcode: {
     type: Number,
     required: true,
+    validate: {
+      validator: function(value) {
+        return /^\d{5}$/.test(value);
+      },
+      message: props => `${props.value} is not a valid 5-digit postcode!`,
+    },
   },
 });
-
-const Address = mongoose.model('Address', AddressSchema);
-
 
 const validateAddress = (req, res, next) => {
   const token = req.headers['authorization'].split(' ')[1];
@@ -131,7 +153,7 @@ const validateAddress = (req, res, next) => {
     if (err) {
       return res.status(401).json({
         message: 'Unauthorized. Invalid token.',
-        token
+        token,
       });
     }
 
@@ -145,26 +167,8 @@ const validateAddress = (req, res, next) => {
       });
     }
 
-    if (mobilePhone.toString().length !== 10) {
-      return res.status(400).json({
-        message: 'Phone number must be 10 digits long.',
-      });
-    }
-
-    if (address.length < 30) {
-      return res.status(400).json({
-        message: 'Address must be at least 15 characters long.',
-      });
-    }
-
-    if (postcode.toString().length !== 5) {
-      return res.status(400).json({
-        message: 'Postcode must be 5 digits long.',
-      });
-    }
-
     next();
-  })
+  });
 };
 
 const saveAddress = async (req, res) => {
