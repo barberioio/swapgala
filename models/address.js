@@ -100,7 +100,7 @@ const AddressSchema = new mongoose.Schema({
     maxlength: [50, 'Last name cannot exceed 50 characters.'],
   },
   mobilePhone: {
-    type: Number,
+    type: String,
     required: true,
     validate: {
       validator: function(value) {
@@ -131,7 +131,7 @@ const AddressSchema = new mongoose.Schema({
     enum: thailandProvinces,
   },
   postcode: {
-    type: Number,
+    type: String,
     required: true,
     validate: {
       validator: function(value) {
