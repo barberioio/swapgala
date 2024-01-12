@@ -84,7 +84,7 @@ const thailandProvinces = [
   'Phetchabun',
 ];
 
-const Address = new mongoose.Schema({
+const AddressSchema = new mongoose.Schema({
   firstName: {
     type: String,
     required: true,
@@ -141,6 +141,8 @@ const Address = new mongoose.Schema({
     },
   },
 });
+
+const Address = mongoose.model('Address', AddressSchema);
 
 const validateAddress = (req, res, next) => {
   const token = req.headers['authorization'].split(' ')[1];
