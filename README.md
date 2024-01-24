@@ -75,12 +75,6 @@ link for API_KEY : [API_KEY](https://drive.google.com/file/d/1ReClH3M-FhnwBAqxO_
 
 
 **Do not share  API key with others, or expose it in the browser or other client-side code.** In order to protect the security of your account, OpenAI may also automatically disable any API key that they've found has leaked publicly.
-## Roadmap
-
-- Additional browser support
-
-- Add more integrations
-
 
 ## API Reference
 
